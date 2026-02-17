@@ -170,7 +170,7 @@ const SAHAR_DUO =
   "_(Mazmuni: Ramazon oyida ertangi ro‘zani Alloh rizoligi uchun tutishga niyat qildim.)_";
 
 const IFTOR_DUO =
-  "🌇 *Iftorlik duosi*\n" +
+  "🌇 *Iftorlik duosi🍽️*\n" +
   "Allohumma laka sumtu wa bika amantu wa ‘alayka tavakkaltu wa ‘ala rizqika aftartu.\n" +
   "_(Mazmuni: Allohim, Sen uchun ro‘za tutdim, Senga iymon keltirdim, Senga tavakkal qildim va bergan rizqing bilan iftor qildim.)_";
 
@@ -238,7 +238,7 @@ bot.use(async (ctx, next) => {
 // =========================
 // Bugun / Ertaga -> inline region choose
 // =========================
-bot.hears("Manba", (ctx) => ctx.replyWithMarkdown(SOURCE_TEXT, MAIN_KB));
+bot.hears("Manba📚", (ctx) => ctx.replyWithMarkdown(SOURCE_TEXT, MAIN_KB));
 bot.hears("Admin", async (ctx) => {
   await ctx.reply(
     "📩 Taklif va murojaat uchun: @yuldashev_frontend",
@@ -246,7 +246,7 @@ bot.hears("Admin", async (ctx) => {
   );
 });
 
-bot.hears("Bugun", async (ctx) => {
+bot.hears("Bugun🗓️", async (ctx) => {
   USERS = loadUsers();
   const u = getUser(ctx.chat.id);
 
@@ -275,11 +275,11 @@ bot.hears("Bugun", async (ctx) => {
   }
 
   // Region yo‘q bo‘lsa — tanlash chiqaramiz
-  await ctx.reply("📍 Viloyatni tanlang (Bugun):", regionInlineKeyboard("today"));
+  await ctx.reply("📍 Viloyatni tanlang (Bugun🗓️):", regionInlineKeyboard("today"));
 });
 
 
-bot.hears("Ertaga", async (ctx) => {
+bot.hears("Ertaga🗓️", async (ctx) => {
   USERS = loadUsers();
   const u = getUser(ctx.chat.id);
 
@@ -306,7 +306,7 @@ bot.hears("Ertaga", async (ctx) => {
     return ctx.replyWithMarkdown(msg, MAIN_KB);
   }
 
-  await ctx.reply("📍 Viloyatni tanlang (Ertaga):", regionInlineKeyboard("tomorrow"));
+  await ctx.reply("📍 Viloyatni tanlang (Ertaga🗓️):", regionInlineKeyboard("tomorrow"));
 });
 
 
@@ -360,7 +360,7 @@ bot.on("callback_query", async (ctx) => {
     return;
   }
 
-  const title = action === "today" ? "Bugun" : "Ertaga";
+  const title = action === "today" ? "Bugun🗓️" : "Ertaga🗓️";
   const msg =
     `📍 *${region}*\n` +
     `📅 *${title}: ${prettyDate(targetDate)}*\n` +
@@ -377,8 +377,8 @@ bot.on("callback_query", async (ctx) => {
 // =========================
 // Duolar
 // =========================
-bot.hears("Saharlik duosi", (ctx) => ctx.replyWithMarkdown(SAHAR_DUO, MAIN_KB));
-bot.hears("Iftorlik duosi", (ctx) => ctx.replyWithMarkdown(IFTOR_DUO, MAIN_KB));
+bot.hears("Saharlik duosi🌅", (ctx) => ctx.replyWithMarkdown(SAHAR_DUO, MAIN_KB));
+bot.hears("Iftorlik duosi🍽️", (ctx) => ctx.replyWithMarkdown(IFTOR_DUO, MAIN_KB));
 
 // =========================
 // ADMIN PANEL

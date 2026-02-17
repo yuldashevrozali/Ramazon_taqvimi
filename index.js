@@ -421,6 +421,14 @@ bot.on("text", (ctx) => {
 // =========================
 // Run
 // =========================
+const express = require("express");
+const app = express();
+
+const PORT = process.env.PORT || 3000;
+
+app.get("/", (req, res) => res.send("OK"));
+app.listen(PORT, () => console.log("✅ Server listening on", PORT));
+
 bot.launch().then(() => console.log("✅ Ramazon bot ishga tushdi"));
 
 process.once("SIGINT", () => bot.stop("SIGINT"));

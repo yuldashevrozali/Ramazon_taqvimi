@@ -178,11 +178,19 @@ const IFTOR_DUO =
 // Registration flow
 // =========================
 async function askContact(ctx) {
-  await ctx.reply(
-    "✅ Botdan foydalanish uchun *kontaktingizni ulashing* 👇",
-    { parse_mode: "Markdown", ...CONTACT_KB }
-  );
+  try {
+    await ctx.reply(
+      "✅ Botdan foydalanish uchun *kontaktingizni ulashing* 👇",
+      { parse_mode: "Markdown", ...CONTACT_KB }
+    );
+  } catch (err) {
+    // user botni bloklab qo‘ygan bo‘lsa 403 keladi — shunchaki jim o‘tamiz
+    const code = err?.response?.error_code;
+    if (code === 403) return;
+    console.error("askContact error:", err);
+  }
 }
+
 
 async function showWelcome(ctx) {
   await ctx.reply(

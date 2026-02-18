@@ -429,7 +429,20 @@ const PORT = process.env.PORT || 3000;
 app.get("/", (req, res) => res.send("OK"));
 app.listen(PORT, () => console.log("✅ Server listening on", PORT));
 
-bot.launch().then(() => console.log("✅ Ramazon bot ishga tushdi"));
+bot.launch()
+  .then(() => console.log("✅ Bot ishga tushdi"))
+  .catch((err) => {
+    console.error("❌ bot.launch xatosi:", err);
+    process.exit(1);
+  });
+bot.catch((err, ctx) => {
+  console.error("❌ Telegraf error:", err);
+});
+
+process.on("unhandledRejection", (err) => {
+  console.error("❌ UnhandledRejection:", err);
+});
+
 
 process.once("SIGINT", () => bot.stop("SIGINT"));
 process.once("SIGTERM", () => bot.stop("SIGTERM"));
